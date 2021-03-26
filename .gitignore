@@ -1,5 +1,7 @@
 # Default ignored files
 .idea
 .vscode
+.factorypath
+.project  
+.classpath
 target
-
