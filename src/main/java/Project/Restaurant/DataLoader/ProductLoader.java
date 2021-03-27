@@ -22,13 +22,13 @@ public class ProductLoader implements ApplicationRunner{
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        productRepository.save(new Product("McChicken","Główne",350,10));
-        productRepository.save(new Product("Big Mac","Główne",650,15));
-        productRepository.save(new Product("McDouble","Główne",400,10));
-        productRepository.save(new Product("Frytki","Dodatek",200,5));
-        productRepository.save(new Product("Jabłko","Dodatek",10,3));
+        productRepository.save(new Product("Miso Ramen","Ramen",350,10));
+        productRepository.save(new Product("Shoyu Ramen","Ramen",650,15));
+        productRepository.save(new Product("Tantanmen Ramen","Ramen",400,10));
+        productRepository.save(new Product("Gyudon","Główne",200,5));
+        productRepository.save(new Product("Tori Teriyaki","Główne",10,3));
         productRepository.save(new Product("Coca Cola","Napój",100,5));
-        productRepository.save(new Product("Sprite","Napój",100,5));
+        productRepository.save(new Product("Sake","Napój",100,5));
 
         // List<Product> productList = productRepository.findAll();
 
