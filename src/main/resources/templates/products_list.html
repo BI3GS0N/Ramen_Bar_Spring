@@ -59,7 +59,7 @@
 
             <div class="table-responsive">
                 <table class="table table-sm table-custom table-borderless">
-                    <thead>
+                    <thead class="fs-4">
                         <tr class="active">
                             <th>Nazwa</th>
                             <th>Kategoria</th>
@@ -69,7 +69,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="product : ${productList}">
+                        <tr th:each="product : ${productList}" class="fs-5">
                             <td> <b th:utext="${product.name}">...</b> </td>
                             <td> <b th:utext="${product.category}">...</b> </td>
                             <td> <b th:utext="${product.calories}">...</b> </td>
