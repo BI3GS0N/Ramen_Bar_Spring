@@ -1,6 +1,7 @@
 body {
 	background-color: black;
 	margin: 0;
+	font-family: 'Kiwi Maru', serif;
 }
 .bg-image {
 	position: fixed;
@@ -14,6 +15,8 @@ body {
 	filter: blur(3px);
 	z-index: -99;
 }
+
+/* NAVBAR */
 nav {
 	background-color: rgba(206, 206, 206, 0.6);
 	border-radius: 0 0 15% 15%;
@@ -31,14 +34,17 @@ nav.scrolled {
 .logo-p {
 	color: rgba(190, 0, 0, 0.9);
 	font-size: 2em;
+	letter-spacing: -10px;
 }
 .nav-link {
 	box-sizing: border-box;
 	border-bottom: 2px solid transparent;
+	letter-spacing: 2px;
+	font-family: 'MyBrush', sans-serif;
 }
 .nav-link:hover {
 	box-sizing: border-box;
-	animation: border-pulsing 3s infinite;
+	animation: border-pulsing 1.5s infinite;
 	border-bottom: 3px solid gray;
 }
 
@@ -46,6 +52,11 @@ nav.scrolled {
 	50% {
 		border-color: rgba(190, 0, 0, 0.9);
 	}
+}
+
+@font-face {
+	font-family: 'MyBrush';
+	src: url('../assets/aAlwaysSmile.ttf') format('truetype');
 }
 
 .test {

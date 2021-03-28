@@ -6,6 +6,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-family: 'Kiwi Maru', serif;
 }
 .bg-image {
 	position: fixed;
@@ -27,13 +28,14 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	box-shadow: 0px 3px 15px 5px #ffc72c75;
+	background-color: rgba(206, 206, 206, 0.6);
+	box-shadow: 0px 3px 15px 5px #000;
 	border-radius: 5px;
 	padding: 15px;
 }
 
 .header-card {
-	color: #ffc72c;
+	color: rgba(190, 0, 0, 0.9);
 	font-family: 'Lobster', cursive;
 	letter-spacing: 2px;
 	padding: 10px;
@@ -43,15 +45,28 @@ body {
 	align-items: center;
 }
 label {
-	color: #ffc72c;
+	color: black;
 	font-weight: bold;
 	margin-left: 2px;
 }
+form .form-control:focus {
+	border-color: #ced4da;
+	box-shadow: 0px 3px 13px -1px #000;
+}
+/* .btn,
+label {
+	font-family: 'MyBrush', sans-serif;
+}
 
-input:-webkit-autofill,
+@font-face {
+	font-family: 'MyBrush';
+	src: url('../assets/aAlwaysSmile.ttf') format('truetype');
+} */
+
+/* input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
 	transition: background-color 5000s ease-in-out 0s;
 	-webkit-text-fill-color: #fff !important;
-}
+} */
