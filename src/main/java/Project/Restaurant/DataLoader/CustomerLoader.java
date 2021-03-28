@@ -21,8 +21,8 @@ public class CustomerLoader implements ApplicationRunner{
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 
-		Customer customer = new Customer("Sylwester","Toropolski","123456657",
-											"toropolski@gmail.com", PasswordEncoder.coding("haslo"),
+		Customer customer = new Customer("Sylwester","Biega","123456657",
+											"biega@gmail.com", PasswordEncoder.coding("haslo"),
 											"Liszna","69");
 										customer.setRole("ROLE_ADMIN");
 										customerRepository.save(customer);
@@ -32,8 +32,8 @@ public class CustomerLoader implements ApplicationRunner{
 											"Zarszyn","Krakowska 1"));
 											
 
-		customerRepository.save(new Customer("Piotr","Biega","152346533",
-											"biega@gmail.com", PasswordEncoder.coding("haslo"),
+		customerRepository.save(new Customer("Piotr","Toropolski","152346533",
+											"toropolski@gmail.com", PasswordEncoder.coding("haslo"),
 											"Kraków","Jana Pawła II"));
 
 

@@ -19,7 +19,7 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping(value = "/403")
+    @RequestMapping(value = "/errorPage")
     public String notPermission(Model model)
     {
         model.addAttribute("header", "Ups...");
