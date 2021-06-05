@@ -11,9 +11,9 @@ public interface RSetRepository extends JpaRepository<RSet, Long> {
 
     List<RSet> findByOrderItemOrderId(long id);
 
-    @Query(value ="select R_Set.name,R_Set.price " +
-            "from R_Set " +
-            "group by R_Set.name,R_Set.price", nativeQuery = true)
+    @Query(value ="select rSet.name,rSet.price " +
+            "from rSet " +
+            "group by rSet.name,rSet.price", nativeQuery = true)
     List<String> findBySQLQuery();
 
     @Query(value ="select s.product from RSet", nativeQuery = true)
