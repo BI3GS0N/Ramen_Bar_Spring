@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramen Project - Error</title>
+    <title>Set edit</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/app.css">
@@ -58,10 +58,60 @@
     </nav>
 
     <main>
-        <div class="container container-error mt-5 p-2">
-            <h2 class="text-center display-2" th:text="${header}" />
-            <p class="text-center m-auto" th:text="${message}" />
+        <div class="container  container-custom mt-5 p-2">
+
+            <h2 class="display-2 text-center" th:text="${header}"></h2>
+
+            <form action="#" method="POST" th:object="${rSetData}">
+
+                <div class="row mb-3">
+                    <div class="form-floating col">
+                        <input th:field="${rSetData.name}" type="text"
+                            class="form-control bg-dark bg-gradient text-white" id="nazwa" placeholder="Wprowadź Nazwę">
+                        <label for="nazwa">Nazwa</label>
+                    </div>
+                    <div class="form-floating col">
+                        <input th:field="${rSetData.price}" type="text"
+                            class="form-control bg-dark bg-gradient text-white" id="cena" placeholder="Wprowadź Cenę">
+                        <label for="cena">Cena</label>
+                    </div>
+                </div>
+
+
+
+                <div class="row mb-3">
+                    <div class="form-floating col-md-4">
+                        <select class="form-select bg-dark text-white" id="mainProd"
+                            aria-label="Floating label select example" th:field="${rSetData.mainProduct}">
+                            <option th:each="productMain : ${productsMain}" th:value="${productMain}"
+                                th:text="${productMain}"></option>
+                        </select>
+                        <label for="mainProd">Głowne</label>
+                    </div>
+                    <div class="form-floating col-md-4">
+                        <select class="form-select bg-dark text-white" id="secProd"
+                            aria-label="Floating label select example" th:field="${rSetData.secProduct}">
+                            <option th:each="productSec : ${productsSec}" th:value="${productSec}"
+                                th:text="${productSec}"></option>
+                        </select>
+                        <label for="secProd">Dodatek</label>
+                    </div>
+                    <div class="form-floating col-md-4">
+                        <select class="form-select bg-dark text-white" id="drink"
+                            aria-label="Floating label select example" th:field="${rSetData.drink}">
+                            <option th:each="drink : ${productsDrink}" th:value="${drink}" th:text="${drink}"></option>
+                        </select>
+                        <label for="secProd">Napój</label>
+                    </div>
+                </div>
+
+                <div class="w-100 d-flex justify-content-center mt-3">
+                    <button type="submit" class="btn btn-dark bg-gradient btn-lg">Zapisz</button>
+                </div>
+            </form>
+
         </div>
+
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"

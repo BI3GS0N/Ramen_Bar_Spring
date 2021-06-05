@@ -24,19 +24,21 @@
     <nav id="mainNav" class="navbar navbar-expand-md navbar-light sticky-top px-3">
         <div class="container-fluid">
             <a href="/" class="navbar-brand m-0 d-flex flex-row">
-                <img src="assets/ramen.png" alt="" srcset="">
-                <p class="logo-p align-self-center m-0 mx-2">シウビト</p>
+                <img src="assets/ramen.png" alt="logo-ramen" srcset="">
+                <p class="logo-p my-auto mx-2 fs-2">シウビト</p>
             </a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar2" aria-controls="navbar2">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar2">
                 <div class="navbar-nav text-center me-auto ms-5 align-items-center">
-                    <a href="#" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">O nas</a>
-                    <a href="/products_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Menu</a>
-                    <a href="#" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Kontakt</a>
+                    <a href="/products_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Produkty</a>
+                    <a href="/set_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zestawy</a>
+                    <a href="/customer_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Klienci</a>
+                    <a href="/add_set" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Dodaj zestaw</a>
+                    <a href="/add_product" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Dodaj produkt</a>
                     <a href="#" class="nav-item nav-link fw-bold fs-3 text-dark pb-0"
-                        sec:authorize="hasRole('ROLE_ADMIN')">Panel Admin</a>
+                        sec:authorize="hasRole('ROLE_ADMIN')">Panel Admin(empty)</a>
                 </div>
                 <div class="navbar-nav text-center ms-5 align-items-center">
                     <a style='color: rgb(190, 0, 0);' href="/login" class="nav-item nav-link fw-bold fs-3 pb-0"
@@ -45,6 +47,8 @@
                         sec:authorize="!isAuthenticated()">Zarejestruj</a>
                     <form method="POST" th:action="@{/logout}" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"
                         class="d-flex justify-content-center">
+                        <a href="/editUser" class="nav-item nav-link fw-bold fs-3 pb-0"
+                            sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">Edytuj dane</a>
                         <input type="submit" value="Wyloguj" style='color: rgb(190, 0, 0);'
                             class="d-flex nav-item nav-link btn fw-bold fs-3 nav-input-logout">
                     </form>

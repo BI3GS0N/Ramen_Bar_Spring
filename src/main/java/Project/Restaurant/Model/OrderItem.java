@@ -20,15 +20,15 @@ public class OrderItem {
     @ManyToOne
     private Product product;
 
-    // @ManyToOne
-    // private McSet mcSet;
+    @ManyToOne
+    private RSet rSet;
 
     // protected OrderItem(){}
 
     public OrderItem() {
         order = null;
         product = null;
-        // mcSet = null;
+        rSet = null;
         // this.quantity = quantity;
     }
 
@@ -56,13 +56,13 @@ public class OrderItem {
 		this.product = product;
 	}
 
-	// public McSet getMcSet() {
-	// 	return mcSet;
-	// }
+	public RSet getRSet() {
+		return rSet;
+	}
 
-	// public void setMcSet(McSet mcSet) {
-	// 	this.mcSet = mcSet;
-	// }
+	public void setRSet(RSet rSet) {
+		this.rSet = rSet;
+	}
 
     // public int getQuantity() {
     //     return quantity;

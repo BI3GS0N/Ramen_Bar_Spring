@@ -8,7 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-// import javax.persistence.ManyToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -22,8 +22,8 @@ public class Product {
     private int calories;
     private double price;
     
-    // @ManyToMany(mappedBy = "product", fetch = FetchType.EAGER)
-    // private Set<McSet> mcSet;
+    @ManyToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private Set<RSet> rSet;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private Set<OrderItem> orderItem;
@@ -35,7 +35,7 @@ public class Product {
         this.category = category;
         this.calories = calories;
         this.price = price;
-        // rSet = new HashSet<RSet>();
+        rSet = new HashSet<RSet>();
         orderItem = new HashSet<OrderItem>();
     }
 
@@ -79,13 +79,13 @@ public class Product {
         this.price = price;
     }
 
-	// public Set<McSet> getMcSet() {
-	// 	return mcSet;
-	// }
+	public Set<RSet> getRSet() {
+		return rSet;
+	}
 
-	// public void setMcSet(Set<McSet> mcSet) {
-	// 	this.mcSet = mcSet;
-	// }
+	public void setRSet(Set<RSet> rSet) {
+		this.rSet = rSet;
+	}
 
 	public Set<OrderItem> getOrderItem() {
 		return orderItem;

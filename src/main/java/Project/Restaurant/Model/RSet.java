@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-// import javax.persistence.OneToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class RSet {
@@ -22,8 +22,8 @@ public class RSet {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Product> product;
 
-    // @OneToMany(mappedBy = "rSet", fetch = FetchType.EAGER)
-    // private Set<OrderItem> orderItem;
+    @OneToMany(mappedBy = "rSet", fetch = FetchType.EAGER)
+    private Set<OrderItem> orderItem;
 
     protected RSet(){}
 
@@ -31,7 +31,7 @@ public class RSet {
         this.name = name;
         this.price = price;
         product = new HashSet<Product>();
-        // orderItem = new HashSet<OrderItem>();
+        orderItem = new HashSet<OrderItem>();
     }
 
     public Long getId() {
@@ -66,13 +66,13 @@ public class RSet {
         this.product = product;
     }
 
-	// public Set<OrderItem> getOrderItem() {
-	// 	return orderItem;
-	// }
+	public Set<OrderItem> getOrderItem() {
+		return orderItem;
+	}
 
-	// public void setOrderItem(Set<OrderItem> orderItem) {
-	// 	this.orderItem = orderItem;
-	// }
+	public void setOrderItem(Set<OrderItem> orderItem) {
+		this.orderItem = orderItem;
+	}
 
     
 }
