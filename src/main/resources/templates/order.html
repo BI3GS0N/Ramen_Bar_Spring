@@ -34,10 +34,8 @@
                 <div class="navbar-nav text-center me-auto ms-5 align-items-center">
                     <a href="/products_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Produkty</a>
                     <a href="/set_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zestawy</a>
-                    <a href="/customer_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Klienci</a>
-                    <a href="/add_set" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Dodaj zestaw</a>
-                    <a href="/add_product" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Dodaj produkt</a>
-                    <a href="/printOrders" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zamowienia</a>
+                    <a href="/customer_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0"
+                        sec:authorize="hasRole('ROLE_ADMIN')">Klienci</a>
                     <a style="color: rgb(190, 0, 0);" href="/order"
                         class="nav-item nav-link fw-bold fs-3 pb-0">Zamow</a>
                 </div>
