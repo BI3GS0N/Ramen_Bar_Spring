@@ -36,8 +36,10 @@
                     <a href="/set_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zestawy</a>
                     <a href="/customer_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0"
                         sec:authorize="hasRole('ROLE_ADMIN')">Klienci</a>
-                    <a style="color: rgb(190, 0, 0);" href="/order"
-                        class="nav-item nav-link fw-bold fs-3 pb-0">Zamow</a>
+                    <a style="color: rgb(190, 0, 0);" href="/order" class="nav-item nav-link fw-bold fs-3 pb-0"
+                        sec:authorize="hasRole('ROLE_USER')">Zamow</a>
+                    <a style="color: rgb(190, 0, 0);" href="/order" class="nav-item nav-link fw-bold fs-3 pb-0"
+                        sec:authorize="!isAuthenticated()">Zamow</a>
                 </div>
                 <div class="navbar-nav text-center ms-5 align-items-center">
                     <a style='color: rgb(190, 0, 0);' href="/login" class="nav-item nav-link fw-bold fs-3 pb-0"
@@ -45,7 +47,7 @@
                     <a style='color: rgb(190, 0, 0);' href="/register" class="nav-item nav-link fw-bold fs-3 pb-0"
                         sec:authorize="!isAuthenticated()">Zarejestruj</a>
                     <a sec:authorize="hasRole('ROLE_USER')" href="/basket"
-                        class="d-flex btn btn-light nav-item nav-link align-items-center m-1"><svg
+                        class="d-flex btn nav-item nav-link align-items-center m-1"><svg
                             xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
                             class="bi bi-basket" viewBox="0 0 16 16">
                             <path
@@ -75,7 +77,7 @@
                     <div class="form-floating col-md-6">
                         <input th:field="${customerData.firstName}" type="text"
                             class="form-control bg-transparent text-dark" id="imie" placeholder="Wprowadź Imię">
-                        <label for="imie">Imię</label>
+                        <label for="imie">Imie</label>
                     </div>
                     <div class="form-floating col-md-6">
                         <input th:field="${customerData.lastName}" type="text"
@@ -101,7 +103,7 @@
                     <div class="form-floating col-md-6">
                         <input th:field="${customerData.city}" type="text" class="form-control bg-transparent text-dark"
                             id="miejscowosc" placeholder="Wprowadź Imię">
-                        <label for="miejscowosc">Miejscowość</label>
+                        <label for="miejscowosc">Miejscowosc</label>
                     </div>
                     <div class="form-floating col-md-6">
                         <input th:field="${customerData.address}" type="text"
@@ -114,7 +116,7 @@
                     <div class="form-floating col">
                         <input th:field="${customerData.password}" type="password"
                             class="form-control bg-transparent text-dark" id="password" placeholder="Wprowadź hasło">
-                        <label for="password">Hasło</label>
+                        <label for="password">Haslo</label>
                     </div>
                 </div>
 

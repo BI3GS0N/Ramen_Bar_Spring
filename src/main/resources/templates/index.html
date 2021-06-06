@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="styles/app.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
@@ -36,8 +37,10 @@
                     <a href="/set_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zestawy</a>
                     <a href="/customer_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0"
                         sec:authorize="hasRole('ROLE_ADMIN')">Klienci</a>
-                    <a style="color: rgb(190, 0, 0);" href="/order"
-                        class="nav-item nav-link fw-bold fs-3 pb-0">Zamow</a>
+                    <a style="color: rgb(190, 0, 0);" href="/order" class="nav-item nav-link fw-bold fs-3 pb-0"
+                        sec:authorize="hasRole('ROLE_USER')">Zamow</a>
+                    <a style="color: rgb(190, 0, 0);" href="/order" class="nav-item nav-link fw-bold fs-3 pb-0"
+                        sec:authorize="!isAuthenticated()">Zamow</a>
                 </div>
                 <div class="navbar-nav text-center ms-5 align-items-center">
                     <a style='color: rgb(190, 0, 0);' href="/login" class="nav-item nav-link fw-bold fs-3 pb-0"
@@ -45,7 +48,7 @@
                     <a style='color: rgb(190, 0, 0);' href="/register" class="nav-item nav-link fw-bold fs-3 pb-0"
                         sec:authorize="!isAuthenticated()">Zarejestruj</a>
                     <a sec:authorize="hasRole('ROLE_USER')" href="/basket"
-                        class="d-flex btn btn-light nav-item nav-link align-items-center m-1"><svg
+                        class="d-flex btn nav-item nav-link align-items-center m-1"><svg
                             xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
                             class="bi bi-basket" viewBox="0 0 16 16">
                             <path
@@ -66,20 +69,59 @@
     <main>
 
         <div class="container container-custom mt-5 p-2">
-            <h2 class="text-center display-2">Witaj <span sec:authorize="isAuthenticated()" sec:authentication="name">
-                </span>
+
+            <h2 class="text-center display-2 mb-3 mt-3">Witaj <span sec:authorize="isAuthenticated()"
+                    sec:authentication="name"></span>
             </h2>
 
 
-            <div sec:authorize="hasRole('ROLE_ADMIN')" class="row">
-                <a href="/add_product" class="btn fs-3 m-2">Dodaj produkt</a>
-                <a href="/add_set" class="btn fs-3 m-2">Dodaj Zestaw</a>
-                <a href="/printOrders" class="btn fs-3 m-2">Lista zamówień</a>
+            <div class="d-flex justify-content-center" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="/add_product" class="btn btn-custom fs-3 m-2">Dodaj produkt</a>
+                <a href="/add_set" class="btn btn-custom fs-3 m-2">Dodaj Zestaw</a>
+                <a href="/printOrders" class="btn btn-custom fs-3 m-2">Lista zamowien</a>
 
             </div>
 
+            <div class="d-flex flex-column" sec:authorize="hasRole('ROLE_USER')">
+                <h2 class=" text-center fw-bold fs-2 mb-3">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit.
+                </h2>
+                <p class="text-center fs-4 p-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores
+                    repellat distinctio, quibusdam
+                    sequi nobis ea nam minus labore, ratione totam assumenda laudantium aperiam voluptates unde quis
+                    reiciendis alias neque maiores. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero
+                    laudantium nihil, maiores dicta alias facilis nesciunt earum voluptatem sint, deleniti maxime itaque
+                    numquam provident laboriosam dolorum molestias consectetur minima excepturi!
+                </p>
+                <p class="text-center fs-4 p-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
+                    repellendus
+                    suscipit saepe? Qui totam, harum expedita quisquam odit placeat magnam culpa eius dolorem officia
+                    doloremque doloribus nemo, nisi voluptas tenetur.
+                </p>
+            </div>
+            <div class="d-flex flex-column" sec:authorize="!isAuthenticated()">
+                <h2 class=" text-center fw-bold fs-2 mb-3">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit.
+                </h2>
+                <p class="text-center fs-4 p-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores
+                    repellat distinctio, quibusdam
+                    sequi nobis ea nam minus labore, ratione totam assumenda laudantium aperiam voluptates unde quis
+                    reiciendis alias neque maiores. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero
+                    laudantium nihil, maiores dicta alias facilis nesciunt earum voluptatem sint, deleniti maxime itaque
+                    numquam provident laboriosam dolorum molestias consectetur minima excepturi!
+                </p>
+                <p class="text-center fs-4 p-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
+                    repellendus
+                    suscipit saepe? Qui totam, harum expedita quisquam odit placeat magnam culpa eius dolorem officia
+                    doloremque doloribus nemo, nisi voluptas tenetur.
+                </p>
+            </div>
 
-
+            <div class="flex-center">
+                <a href="https://www.twitter.com"><i class="fa fa-twitter fa-4x icon-3d"></i></a>
+                <a href="https://www.facebook.com"><i class="fa fa-facebook fa-4x icon-3d"></i></a>
+                <a href="https://www.instagram.com"><i class="fa fa-instagram fa-4x icon-3d"></i></a>
+            </div>
 
         </div>
 

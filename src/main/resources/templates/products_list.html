@@ -36,8 +36,10 @@
                     <a href="/set_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zestawy</a>
                     <a href="/customer_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0"
                         sec:authorize="hasRole('ROLE_ADMIN')">Klienci</a>
-                    <a style="color: rgb(190, 0, 0);" href="/order"
-                        class="nav-item nav-link fw-bold fs-3 pb-0">Zamow</a>
+                    <a style="color: rgb(190, 0, 0);" href="/order" class="nav-item nav-link fw-bold fs-3 pb-0"
+                        sec:authorize="hasRole('ROLE_USER')">Zamow</a>
+                    <a style="color: rgb(190, 0, 0);" href="/order" class="nav-item nav-link fw-bold fs-3 pb-0"
+                        sec:authorize="!isAuthenticated()">Zamow</a>
                 </div>
                 <div class="navbar-nav text-center ms-5 align-items-center">
                     <a style='color: rgb(190, 0, 0);' href="/login" class="nav-item nav-link fw-bold fs-3 pb-0"
@@ -45,7 +47,7 @@
                     <a style='color: rgb(190, 0, 0);' href="/register" class="nav-item nav-link fw-bold fs-3 pb-0"
                         sec:authorize="!isAuthenticated()">Zarejestruj</a>
                     <a sec:authorize="hasRole('ROLE_USER')" href="/basket"
-                        class="d-flex btn btn-light nav-item nav-link align-items-center m-1"><svg
+                        class="d-flex btn nav-item nav-link align-items-center m-1"><svg
                             xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
                             class="bi bi-basket" viewBox="0 0 16 16">
                             <path
@@ -87,7 +89,7 @@
                             <td class="button-column text-center m-0" sec:authorize="hasRole('ROLE_ADMIN')">
                                 <div class="btn-group">
                                     <a class="btn btn-light btn-sm"
-                                        th:href="@{/deleteProduct(Id=${product.id})}">Usuń</a>
+                                        th:href="@{/deleteProduct(Id=${product.id})}">Usun</a>
                                     <a class="btn btn-dark btn-sm" th:href="@{/editProduct(
                                     productId=${product.id},
                                     productName=${product.name},
@@ -102,9 +104,7 @@
                     </tbody>
 
                 </table>
-                <div th:each="product : ${productList}">
-                    <h3 th:utext=" ${product.name}">...</h3>
-                </div>
+
             </div>
 
 

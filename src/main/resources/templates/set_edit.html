@@ -36,8 +36,10 @@
                     <a href="/set_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zestawy</a>
                     <a href="/customer_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0"
                         sec:authorize="hasRole('ROLE_ADMIN')">Klienci</a>
-                    <a style="color: rgb(190, 0, 0);" href="/order"
-                        class="nav-item nav-link fw-bold fs-3 pb-0">Zamow</a>
+                    <a style="color: rgb(190, 0, 0);" href="/order" class="nav-item nav-link fw-bold fs-3 pb-0"
+                        sec:authorize="hasRole('ROLE_USER')">Zamow</a>
+                    <a style="color: rgb(190, 0, 0);" href="/order" class="nav-item nav-link fw-bold fs-3 pb-0"
+                        sec:authorize="!isAuthenticated()">Zamow</a>
                 </div>
                 <div class="navbar-nav text-center ms-5 align-items-center">
                     <a style='color: rgb(190, 0, 0);' href="/login" class="nav-item nav-link fw-bold fs-3 pb-0"
@@ -45,7 +47,7 @@
                     <a style='color: rgb(190, 0, 0);' href="/register" class="nav-item nav-link fw-bold fs-3 pb-0"
                         sec:authorize="!isAuthenticated()">Zarejestruj</a>
                     <a sec:authorize="hasRole('ROLE_USER')" href="/basket"
-                        class="d-flex btn btn-light nav-item nav-link align-items-center m-1"><svg
+                        class="d-flex btn nav-item nav-link align-items-center m-1"><svg
                             xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
                             class="bi bi-basket" viewBox="0 0 16 16">
                             <path
@@ -92,7 +94,7 @@
                             <option th:each="productMain : ${productsMain}" th:value="${productMain}"
                                 th:text="${productMain}"></option>
                         </select>
-                        <label for="mainProd">Głowne</label>
+                        <label for="mainProd">Glowne</label>
                     </div>
                     <div class="form-floating col-md-4">
                         <select class="form-select bg-transparent text-dark" id="secProd"
@@ -107,7 +109,7 @@
                             aria-label="Floating label select example" th:field="${rSetData.drink}">
                             <option th:each="drink : ${productsDrink}" th:value="${drink}" th:text="${drink}"></option>
                         </select>
-                        <label for="secProd">Napój</label>
+                        <label for="secProd">Napoj</label>
                     </div>
                 </div>
 

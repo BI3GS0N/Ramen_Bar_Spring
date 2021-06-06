@@ -61,7 +61,7 @@ public class CustomerController {
     @RequestMapping(value="/customer_list", method = RequestMethod.GET)
     public String customerList(Model model, CustomerData customerData){
         try {
-            List<Customer> customerList = customerRepository.findAll();
+            List<Customer> customerList = customerRepository.findByRole("ROLE_USER");
             model.addAttribute("customerList", customerList);
             return "customer_list";
 

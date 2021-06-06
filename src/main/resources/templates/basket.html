@@ -36,8 +36,10 @@
                     <a href="/set_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zestawy</a>
                     <a href="/customer_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0"
                         sec:authorize="hasRole('ROLE_ADMIN')">Klienci</a>
-                    <a style="color: rgb(190, 0, 0);" href="/order"
-                        class="nav-item nav-link fw-bold fs-3 pb-0">Zamow</a>
+                    <a style="color: rgb(190, 0, 0);" href="/order" class="nav-item nav-link fw-bold fs-3 pb-0"
+                        sec:authorize="hasRole('ROLE_USER')">Zamow</a>
+                    <a style="color: rgb(190, 0, 0);" href="/order" class="nav-item nav-link fw-bold fs-3 pb-0"
+                        sec:authorize="!isAuthenticated()">Zamow</a>
                 </div>
                 <div class="navbar-nav text-center ms-5 align-items-center">
                     <a style='color: rgb(190, 0, 0);' href="/login" class="nav-item nav-link fw-bold fs-3 pb-0"
@@ -45,7 +47,7 @@
                     <a style='color: rgb(190, 0, 0);' href="/register" class="nav-item nav-link fw-bold fs-3 pb-0"
                         sec:authorize="!isAuthenticated()">Zarejestruj</a>
                     <a sec:authorize="hasRole('ROLE_USER')" href="/basket"
-                        class="d-flex btn btn-light nav-item nav-link align-items-center m-1"><svg
+                        class="d-flex btn nav-item nav-link align-items-center m-1"><svg
                             xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
                             class="bi bi-basket" viewBox="0 0 16 16">
                             <path
@@ -66,9 +68,12 @@
     <main>
 
         <div class="container container-custom mt-5 p-2 pb-3">
+
+            <h2 class="text-center  display-2">Koszyk</h2>
+
             <div class="table-responsive">
                 <table class="table table-sm table-custom table-borderless">
-                    <thead>
+                    <thead class="fs-4">
                         <tr class="active">
                             <th>Nazwa</th>
                             <th>Kategoria</th>
@@ -78,7 +83,7 @@
 
                     </thead>
                     <tbody>
-                        <tr th:each="products : ${productsInOrder}">
+                        <tr th:each="products : ${productsInOrder}" class="fs-5">
                             <td> <b th:utext="${products.product.name}">...</b> </td>
                             <td> <b th:utext="${products.product.category}">...</b> </td>
                             <td> <b th:utext="${products.product.price}">...</b> </td>
@@ -89,9 +94,9 @@
                 </table>
             </div>
 
-            <div class="table-responsive">
+            <div class="table-responsive mb-2">
                 <table class="table table-sm table-custom table-borderless">
-                    <thead>
+                    <thead class="fs-4">
                         <tr class="active">
                             <th>Nazwa</th>
                             <th>Wariant</th>
@@ -101,12 +106,10 @@
 
                     </thead>
                     <tbody>
-                        <tr th:each="set : ${setsInOrder}">
+                        <tr th:each="set : ${setsInOrder}" class="fs-5">
                             <td> <b th:utext="${set.reSet.name}">...</b> </td>
                             <td> <b th:each="categorie: ${set.reSet.product}" th:value="${categorie.name}"
-                                    th:text="${categorie.name} + ', '">
-
-                                </b> </td>
+                                    th:text="${categorie.name} + ', '"></b></td>
                             <td> <b th:utext="${set.reSet.price}">...</b> </td>
                             <td> <a th:href="@{/deleteItem(productId=${set.id})}" class="btn btn-danger">Usuń</a>
                             </td>
@@ -114,7 +117,7 @@
                     </tbody>
                 </table>
             </div>
-            <h5> Wartość koszyka: <strong th:text="${priceFinal}" /> zł</h5>
+            <h5 class="display-5">Wartosc koszyka: <strong th:text="${priceFinal}" /> zł</h5>
             <a th:href="@{/order}" class="btn btn-danger">Cofnij</a>
             <a th:href="@{/accept}" class="btn btn-danger">Akceptuj</a>
         </div>
