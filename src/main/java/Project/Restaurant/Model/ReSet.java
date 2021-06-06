@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class RSet {
+public class ReSet {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -22,12 +22,12 @@ public class RSet {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Product> product;
 
-    @OneToMany(mappedBy = "rSet", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "reSet", fetch = FetchType.EAGER)
     private Set<OrderItem> orderItem;
 
-    protected RSet(){}
+    protected ReSet(){}
 
-    public RSet(String name, double price) {
+    public ReSet(String name, double price) {
         this.name = name;
         this.price = price;
         product = new HashSet<Product>();

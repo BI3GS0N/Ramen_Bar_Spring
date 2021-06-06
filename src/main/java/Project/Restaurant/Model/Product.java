@@ -23,7 +23,7 @@ public class Product {
     private double price;
     
     @ManyToMany(mappedBy = "product", fetch = FetchType.EAGER)
-    private Set<RSet> rSet;
+    private Set<ReSet> reSet;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private Set<OrderItem> orderItem;
@@ -35,7 +35,7 @@ public class Product {
         this.category = category;
         this.calories = calories;
         this.price = price;
-        rSet = new HashSet<RSet>();
+        reSet = new HashSet<ReSet>();
         orderItem = new HashSet<OrderItem>();
     }
 
@@ -79,12 +79,12 @@ public class Product {
         this.price = price;
     }
 
-	public Set<RSet> getRSet() {
-		return rSet;
+	public Set<ReSet> getReSet() {
+		return reSet;
 	}
 
-	public void setRSet(Set<RSet> rSet) {
-		this.rSet = rSet;
+	public void setReSet(Set<ReSet> reSet) {
+		this.reSet = reSet;
 	}
 
 	public Set<OrderItem> getOrderItem() {

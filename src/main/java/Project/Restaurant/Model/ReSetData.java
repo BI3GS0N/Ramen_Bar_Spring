@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class RSetData {
+public class ReSetData {
     String name;
     String price;
     String mainProduct;
     String secProduct;
     String drink;
 
-    public RSetData(String name, String price){
+    public ReSetData(String name, String price){
         this.name = name;
         this.price = price;
     }

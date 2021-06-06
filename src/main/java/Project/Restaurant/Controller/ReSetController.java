@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import Project.Restaurant.Model.Product;
-import Project.Restaurant.Model.RSet;
-import Project.Restaurant.Model.RSetData;
+import Project.Restaurant.Model.ReSet;
+import Project.Restaurant.Model.ReSetData;
 import Project.Restaurant.Repository.ProductRepository;
-import Project.Restaurant.Repository.RSetRepository;
+import Project.Restaurant.Repository.ReSetRepository;
 
 @Controller
-public class RSetController {
+public class ReSetController {
 
     @Autowired
-    RSetRepository rSetRepository;
+    ReSetRepository reSetRepository;
     @Autowired
     ProductRepository productRepository;
 
@@ -30,7 +30,7 @@ public class RSetController {
     public String mcSetList(Model model){
         try {
 
-            List<RSet> setList = rSetRepository.findAll();
+            List<ReSet> setList = reSetRepository.findAll();
             model.addAttribute("setList", setList);
             
             return "set_list";
@@ -47,8 +47,8 @@ public class RSetController {
     public String deleteMcSet(@RequestParam(name = "Id")String id, Model model)
     {
         Long longId = Long.parseLong(id);
-        rSetRepository.deleteById(longId);
-        List<RSet> setList = rSetRepository.findAll();
+        reSetRepository.deleteById(longId);
+        List<ReSet> setList = reSetRepository.findAll();
         model.addAttribute("setList", setList);
 
         return "set_list";
@@ -58,7 +58,7 @@ public class RSetController {
     @RequestMapping(value = "/add_set", method = RequestMethod.GET)
     public String addMcSet(Model model)
     {
-        RSetData rSetData = new RSetData();
+        ReSetData rSetData = new ReSetData();
         //glownie dania
         List<Product> productsMainList = productRepository.findByCategory("Ramen");
         ArrayList<String> productsMain = new ArrayList<String>();
@@ -82,7 +82,7 @@ public class RSetController {
     }
 
     @RequestMapping(value = "/add_set", method = RequestMethod.POST)
-    public String addMcSet(Model model, RSetData rSetData)
+    public String addMcSet(Model model, ReSetData rSetData)
     {
         try {
             String name = rSetData.getName();
@@ -92,7 +92,7 @@ public class RSetController {
             String secProd = rSetData.getSecProduct();
             String drink = rSetData.getDrink();
 
-            RSet rSet = new RSet(name, price);
+            ReSet rSet = new ReSet(name, price);
 
             List<Product> mProd = productRepository.findByName(mainProd);
             List<Product> sProd = productRepository.findByName(secProd);
@@ -101,16 +101,16 @@ public class RSetController {
             rSet.getProduct().add(mProd.get(0));
             rSet.getProduct().add(sProd.get(0));
             rSet.getProduct().add(dProd.get(0));
-            mProd.get(0).getRSet().add(rSet);
-            sProd.get(0).getRSet().add(rSet);
-            dProd.get(0).getRSet().add(rSet);
+            mProd.get(0).getReSet().add(rSet);
+            sProd.get(0).getReSet().add(rSet);
+            dProd.get(0).getReSet().add(rSet);
 
-            rSetRepository.save(rSet);
+            reSetRepository.save(rSet);
             productRepository.save(mProd.get(0));
             productRepository.save(sProd.get(0));
             productRepository.save(dProd.get(0));
 
-            List<RSet> setList = rSetRepository.findAll();
+            List<ReSet> setList = reSetRepository.findAll();
             model.addAttribute("setList", setList);
             return "set_list";
         } catch (Exception e) {
@@ -127,7 +127,7 @@ public class RSetController {
                             @RequestParam(name = "setPrice")String price, 
                             Model model)
     {
-        RSetData rSetData = new RSetData(name, price);
+        ReSetData rSetData = new ReSetData(name, price);
         List<Product> productsMainList = productRepository.findByCategory("Ramen");
         ArrayList<String> productsMain = new ArrayList<String>();
         for(Product p : productsMainList) productsMain.add(p.getName());
@@ -150,11 +150,11 @@ public class RSetController {
     }
 
     @RequestMapping(value = "/edit_set", method = RequestMethod.POST)
-    public String editSet(@RequestParam(name = "setId")String id, Model model, RSetData rSetData)
+    public String editSet(@RequestParam(name = "setId")String id, Model model, ReSetData rSetData)
     {
         try {
             Long setId = Long.parseLong(id);
-            Optional<RSet> mcSet = rSetRepository.findById(setId);
+            Optional<ReSet> mcSet = reSetRepository.findById(setId);
 
             if(mcSet.isPresent()){
             String name = rSetData.getName();
@@ -175,16 +175,16 @@ public class RSetController {
             mcSet.get().getProduct().add(mProd.get(0));
             mcSet.get().getProduct().add(sProd.get(0));
             mcSet.get().getProduct().add(dProd.get(0));
-            mProd.get(0).getRSet().add(mcSet.get());
-            sProd.get(0).getRSet().add(mcSet.get());
-            dProd.get(0).getRSet().add(mcSet.get());
+            mProd.get(0).getReSet().add(mcSet.get());
+            sProd.get(0).getReSet().add(mcSet.get());
+            dProd.get(0).getReSet().add(mcSet.get());
 
-            rSetRepository.save(mcSet.get());
+            reSetRepository.save(mcSet.get());
             productRepository.save(mProd.get(0));
             productRepository.save(sProd.get(0));
             productRepository.save(dProd.get(0));
 
-            List<RSet> setList = rSetRepository.findAll();
+            List<ReSet> setList = reSetRepository.findAll();
             model.addAttribute("setList", setList);
 
             return "set_list"; 

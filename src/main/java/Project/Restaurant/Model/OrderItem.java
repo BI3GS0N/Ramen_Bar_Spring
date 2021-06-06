@@ -21,14 +21,14 @@ public class OrderItem {
     private Product product;
 
     @ManyToOne
-    private RSet rSet;
+    private ReSet reSet;
 
     // protected OrderItem(){}
 
     public OrderItem() {
         order = null;
         product = null;
-        rSet = null;
+        reSet = null;
         // this.quantity = quantity;
     }
 
@@ -56,12 +56,12 @@ public class OrderItem {
 		this.product = product;
 	}
 
-	public RSet getRSet() {
-		return rSet;
+	public ReSet getReSet() {
+		return reSet;
 	}
 
-	public void setRSet(RSet rSet) {
-		this.rSet = rSet;
+	public void setReSet(ReSet reSet) {
+		this.reSet = reSet;
 	}
 
     // public int getQuantity() {

@@ -37,6 +37,11 @@
                     <a href="/customer_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Klienci</a>
                     <a href="/add_set" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Dodaj zestaw</a>
                     <a href="/add_product" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Dodaj produkt</a>
+                    <a href="/order" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zamow</a>
+                    <a href="/basket" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Koszyk</a>
+                    <a href="/printOrders" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zamowienia</a>
+
+
                     <a href="#" class="nav-item nav-link fw-bold fs-3 text-dark pb-0"
                         sec:authorize="hasRole('ROLE_ADMIN')">Panel Admin(empty)</a>
                 </div>
@@ -66,13 +71,13 @@
 
                 <div class="row mb-3">
                     <div class="form-floating col">
-                        <input th:field="${rSetData.name}" type="text"
-                            class="form-control bg-dark bg-gradient text-white" id="nazwa" placeholder="Wprowadź Nazwę">
+                        <input th:field="${rSetData.name}" type="text" class="form-control bg-transparent text-dark"
+                            id="nazwa" placeholder="Wprowadź Nazwę">
                         <label for="nazwa">Nazwa</label>
                     </div>
                     <div class="form-floating col">
-                        <input th:field="${rSetData.price}" type="text"
-                            class="form-control bg-dark bg-gradient text-white" id="cena" placeholder="Wprowadź Cenę">
+                        <input th:field="${rSetData.price}" type="text" class="form-control bg-transparent text-dark"
+                            id="cena" placeholder="Wprowadź Cenę">
                         <label for="cena">Cena</label>
                     </div>
                 </div>
@@ -81,7 +86,7 @@
 
                 <div class="row mb-3">
                     <div class="form-floating col-md-4">
-                        <select class="form-select bg-dark text-white" id="mainProd"
+                        <select class="form-select bg-transparent text-dark" id="mainProd"
                             aria-label="Floating label select example" th:field="${rSetData.mainProduct}">
                             <option th:each="productMain : ${productsMain}" th:value="${productMain}"
                                 th:text="${productMain}"></option>
@@ -89,7 +94,7 @@
                         <label for="mainProd">Głowne</label>
                     </div>
                     <div class="form-floating col-md-4">
-                        <select class="form-select bg-dark text-white" id="secProd"
+                        <select class="form-select bg-transparent text-dark" id="secProd"
                             aria-label="Floating label select example" th:field="${rSetData.secProduct}">
                             <option th:each="productSec : ${productsSec}" th:value="${productSec}"
                                 th:text="${productSec}"></option>
@@ -97,7 +102,7 @@
                         <label for="secProd">Dodatek</label>
                     </div>
                     <div class="form-floating col-md-4">
-                        <select class="form-select bg-dark text-white" id="drink"
+                        <select class="form-select bg-transparent text-dark" id="drink"
                             aria-label="Floating label select example" th:field="${rSetData.drink}">
                             <option th:each="drink : ${productsDrink}" th:value="${drink}" th:text="${drink}"></option>
                         </select>

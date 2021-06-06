@@ -10,7 +10,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // List<Product> findByRSetName(String name);
     // List<Product> findByRSetId(long id);
     List<Product> findByCategory(String name);
-    List<Product> findByCategoryAndRSetName(String name,String nameSet);
+    List<Product> findByCategoryAndReSetName(String name,String nameSet);
     // List<Product> findByOrderItemOrderId(long id);
     List<Product> findByName(String name);
     
