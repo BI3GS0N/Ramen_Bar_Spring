@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.*;
 
+import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -180,51 +181,51 @@ public class OrderController {
     {
         try{
         List<Product> productList =  productRepository.findAll();
-        ArrayList<DetailsSet> mcSetList = new ArrayList<>();
+        ArrayList<DetailsSet> setList = new ArrayList<>();
         for(String details:rSetRepository.findBySQLQuery()){
             String[] setNamePrice = details.split(",");
             DetailsSet ds = new DetailsSet(setNamePrice[0],setNamePrice[1]);
-            mcSetList.add(ds);
+            setList.add(ds);
         }
 
         //-------------------------WYSZUKANIE ODPOWIEDNIEGO ZESTAWU ----------------------------
         //WYSZUKIWANIE PRODUKTÓW W DANYCH ZESTAWACH
-        List<ReSet> mcSetList_Main = rSetRepository.findByProductName(postData.getMainProduct());
-        ArrayList<Long> mcSetMain_id = new ArrayList<Long>();
-        for(ReSet mc:mcSetList_Main){
-            mcSetMain_id.add(mc.getId());
+        List<ReSet> setList_Main = rSetRepository.findByProductName(postData.getMainProduct());
+        ArrayList<Long> setMain_id = new ArrayList<Long>();
+        for(ReSet re:setList_Main){
+            setMain_id.add(re.getId());
         }
 
-        List<ReSet> mcSetList_Second = rSetRepository.findByProductName(postData.getSecProduct());
-        ArrayList<Long> mcSetSecond_id = new ArrayList<Long>();
-        for(ReSet mc:mcSetList_Second){
-            mcSetSecond_id.add(mc.getId());
+        List<ReSet> setList_Second = rSetRepository.findByProductName(postData.getSecProduct());
+        ArrayList<Long> setSecond_id = new ArrayList<Long>();
+        for(ReSet re:setList_Second){
+            setSecond_id.add(re.getId());
         }
 
-        List<ReSet> mcSetList_Drink = rSetRepository.findByProductName(postData.getDrink());
-        ArrayList<Long> mcSetDrink_id = new ArrayList<Long>();
-        for(ReSet mc:mcSetList_Drink){
-            mcSetDrink_id.add(mc.getId());
+        List<ReSet> setList_Drink = rSetRepository.findByProductName(postData.getDrink());
+        ArrayList<Long> setDrink_id = new ArrayList<Long>();
+        for(ReSet re:setList_Drink){
+            setDrink_id.add(re.getId());
         }
         //WYSZUKANIE NASZEGO ZESTAWU
-        mcSetMain_id.retainAll(mcSetSecond_id);
-        mcSetMain_id.retainAll(mcSetDrink_id);
+        setMain_id.retainAll(setSecond_id);
+        setMain_id.retainAll(setDrink_id);
 
         //POBRANIE ZESTAWU
-        Optional<ReSet> addMcSet = rSetRepository.findById(mcSetMain_id.get(0));
-        System.out.println(addMcSet.get().getName()+" "+mcSetMain_id);
+        Optional<ReSet> addSet = rSetRepository.findById(setMain_id.get(0));
+        System.out.println(addSet.get().getName()+" "+setMain_id);
 
         //Tworzenie wiersza z produktem
         OrderItem productInOrder = new OrderItem();
         //Dodanie produktu do koszyka
         productInOrder.setOrder(rOrder);
-        productInOrder.setReSet(addMcSet.get());
+        productInOrder.setReSet(addSet.get());
 
         rOrder.getOrderItem().add(productInOrder);
-        addMcSet.get().getOrderItem().add(productInOrder);
+        addSet.get().getOrderItem().add(productInOrder);
 
         orderItemRepository.save(productInOrder);
-        rSetRepository.save(addMcSet .get());
+        rSetRepository.save(addSet .get());
         rOrderRepository.save(rOrder);
 
             List<OrderItem> proInOrd = orderItemRepository.findByOrderId(rOrder.getId());
@@ -234,7 +235,7 @@ public class OrderController {
 
         model.addAttribute("productList",productList);
 
-        model.addAttribute("setList",mcSetList);
+        model.addAttribute("setList",setList);
 
         return "order";
 
@@ -282,16 +283,16 @@ public class OrderController {
             }else{
             List<OrderItem> productsInOrder = orderItemRepository.
                                                     findByOrderIdAndProductNotNull(rOrder.getId());
-            List<OrderItem> kfcSetsInOrder = orderItemRepository.
+            List<OrderItem> setsInOrder = orderItemRepository.
                                                     findByOrderIdAndReSetNotNull(rOrder.getId());
 
-            if(productsInOrder.size()==0 & kfcSetsInOrder.size()==0){
+            if(productsInOrder.size()==0 & setsInOrder.size()==0){
                 model.addAttribute("header", "Koszyk jest pusty");
                 return "errorMessage";
             }else{
                 double priceFinal = 0;
                 for(OrderItem pInO : productsInOrder) priceFinal += pInO.getProduct().getPrice();
-                for(OrderItem kSInO : kfcSetsInOrder) priceFinal += kSInO.getReSet().getPrice();
+                for(OrderItem sInO : setsInOrder) priceFinal += sInO.getReSet().getPrice();
 
                 //Ilość produktów w koszyku
                 List<OrderItem> proInOrd = orderItemRepository.findByOrderId(rOrder.getId());
@@ -302,7 +303,7 @@ public class OrderController {
                 model.addAttribute("header","Lista wszystkich produktow"); //Dodanie obiektu do pamieci lokalnej modelu
                 model.addAttribute("priceFinal",Double.toString(priceFinal)); //Dodanie obiektu do pamieci lokalnej modelu
                 model.addAttribute("productsInOrder",productsInOrder );
-                model.addAttribute("kfcSetsInOrder",kfcSetsInOrder );
+                model.addAttribute("setsInOrder",setsInOrder );
 
                 return "basket";
                 }
@@ -323,15 +324,15 @@ public class OrderController {
         orderItemRepository.deleteById(longId);
 
         List<OrderItem> productsInOrder = orderItemRepository.findByOrderIdAndProductNotNull(rOrder.getId());
-        List<OrderItem> kfcSetsInOrder = orderItemRepository.findByOrderIdAndReSetNotNull(rOrder.getId());
+        List<OrderItem> setsInOrder = orderItemRepository.findByOrderIdAndReSetNotNull(rOrder.getId());
 
-        if(productsInOrder.isEmpty() & kfcSetsInOrder.isEmpty()){
+        if(productsInOrder.isEmpty() & setsInOrder.isEmpty()){
             model.addAttribute("header", "Koszyk jest pusty");
             return "errorMessage";
         }else{
             double priceFinal = 0;
             for(OrderItem pInO : productsInOrder) priceFinal += pInO.getProduct().getPrice();
-            for(OrderItem kSInO : kfcSetsInOrder) priceFinal += kSInO.getReSet().getPrice();
+            for(OrderItem sInO : setsInOrder) priceFinal += sInO.getReSet().getPrice();
 
             List<OrderItem> proInOrd = orderItemRepository.findByOrderId(rOrder.getId());
             int amount = 0;
@@ -341,7 +342,7 @@ public class OrderController {
             model.addAttribute("header","Lista wszystkich produktow"); //Dodanie obiektu do pamieci lokalnej modelu
             model.addAttribute("priceFinal",Double.toString(priceFinal));
             model.addAttribute("productsInOrder",productsInOrder );
-            model.addAttribute("kfcSetsInOrder",kfcSetsInOrder );
+            model.addAttribute("setsInOrder",setsInOrder );
             return "basket";
         }
         }catch(Exception e){
@@ -370,6 +371,7 @@ public class OrderController {
         rOrder = notFinishedOrder.get(0);
 
         String phoneNumber = customerData.getPhone();
+        System.out.println("telefon "+phoneNumber);
         String city = customerData.getCity();
         String adres = customerData.getAddress();
 

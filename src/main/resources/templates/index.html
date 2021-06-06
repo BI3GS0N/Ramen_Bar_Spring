@@ -37,19 +37,22 @@
                     <a href="/customer_list" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Klienci</a>
                     <a href="/add_set" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Dodaj zestaw</a>
                     <a href="/add_product" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Dodaj produkt</a>
-                    <a href="/order" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zamow</a>
-                    <a href="/basket" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Koszyk</a>
                     <a href="/printOrders" class="nav-item nav-link fw-bold fs-3 text-dark pb-0">Zamowienia</a>
-
-
-                    <a href="#" class="nav-item nav-link fw-bold fs-3 text-dark pb-0"
-                        sec:authorize="hasRole('ROLE_ADMIN')">Panel Admin(empty)</a>
+                    <a style="color: rgb(190, 0, 0);" href="/order"
+                        class="nav-item nav-link fw-bold fs-3 pb-0">Zamow</a>
                 </div>
                 <div class="navbar-nav text-center ms-5 align-items-center">
                     <a style='color: rgb(190, 0, 0);' href="/login" class="nav-item nav-link fw-bold fs-3 pb-0"
                         sec:authorize="!isAuthenticated()">Zaloguj</a>
                     <a style='color: rgb(190, 0, 0);' href="/register" class="nav-item nav-link fw-bold fs-3 pb-0"
                         sec:authorize="!isAuthenticated()">Zarejestruj</a>
+                    <a sec:authorize="hasRole('ROLE_USER')" href="/basket"
+                        class="d-flex btn btn-light nav-item nav-link align-items-center m-1"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
+                            class="bi bi-basket" viewBox="0 0 16 16">
+                            <path
+                                d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z" />
+                        </svg></a>
                     <form method="POST" th:action="@{/logout}" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"
                         class="d-flex justify-content-center">
                         <a href="/editUser" class="nav-item nav-link fw-bold fs-3 pb-0"
@@ -63,6 +66,18 @@
     </nav>
 
     <main>
+
+        <div class="container container-custom mt-5 p-2">
+            <h2 class="text-center display-2">Witaj <span sec:authorize="isAuthenticated()" sec:authentication="name">
+                </span>
+            </h2>
+
+            <a href="#" class="btn btn-light">Lista klientów</a>
+
+
+
+
+        </div>
 
     </main>
 
