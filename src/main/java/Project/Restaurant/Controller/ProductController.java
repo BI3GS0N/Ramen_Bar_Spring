@@ -46,7 +46,7 @@ public class ProductController{
         return "products_list";
             
         } catch (Exception e) {
-            model.addAttribute("header", "Błąd");
+            model.addAttribute("header", "Blad");
             model.addAttribute("message", "Ups... Coś poszło nie tak");
             return "errorMessage";
         }
